@@ -159,6 +159,7 @@ let ContainerRepository = class ContainerRepository extends typeorm_1.Repository
                 .then(x => {
                 let rr = new responseBody_1.ResponseBody();
                 rr.body = x;
+                console.log(rr);
                 rr.status = base_controller_1.Status.success;
                 return Promise.resolve(rr);
             })

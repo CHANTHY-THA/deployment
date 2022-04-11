@@ -191,6 +191,7 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
                 .innerJoinAndSelect("booking.operation", "operation")
                 .leftJoinAndSelect("booking.customer", "customer")
                 .leftJoinAndSelect("booking.businessPartner", "businessPartner")
+                .leftJoinAndSelect("booking.bookingStatus", "bookingStatus")
                 .orderBy("booking.ID", "DESC")
                 .skip(pageIndex)
                 .take(pageSize)
@@ -208,6 +209,7 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
                 //     { "bookingStatusID": bookingStatusID, "fromDate": fromDate, "toDate": toDate, "groupID": groupID })
                 .getMany().then(x => {
                 resBody.body = x;
+                console.log(resBody);
                 resBody.status = base_controller_1.Status.success;
                 return Promise.resolve(resBody);
             })
@@ -393,6 +395,7 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
     }
     //reporting
     getBookingsReport(filter) {
+        console.log(filter);
         let resBody = new responseBody_1.ResponseBody();
         try {
             return this.query("CALL sp_getBookingsReport('" +
@@ -406,7 +409,7 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
                 + "');")
                 .then(x => {
                 resBody.body = x[0];
-                console.log(resBody);
+                // console.log(resBody);
                 resBody.status = base_controller_1.Status.success;
                 return Promise.resolve(resBody);
             })

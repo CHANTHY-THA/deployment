@@ -39,6 +39,7 @@ let CarrierRepository = class CarrierRepository extends typeorm_1.Repository {
                 return Promise.resolve(response);
             }
             catch (error) {
+                console.log(error);
                 console.log("CarrierRepository -> addcarrier" + error);
                 return Promise.resolve(error);
             }
