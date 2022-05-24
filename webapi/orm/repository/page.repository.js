@@ -48,7 +48,6 @@ let PageRepository = class PageRepository extends typeorm_2.Repository {
     // ===========Save new page===============
     savePage(page) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(page);
             let response = new responseBody_1.ResponseBody();
             return yield this.save(page)
                 .then(() => {

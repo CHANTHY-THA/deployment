@@ -51,15 +51,18 @@ class AuthenticationHandler {
                 let userRepo = (0, typeorm_1.getCustomRepository)(user_repository_1.UserRepository);
                 let username = req.body.username;
                 let password = crypto_helper_1.CryptoHelper.decrypt_req(req.body.password);
-                //   console.log(CryptoHelper.descrypt("516clZJAUErXWL/bJtl2rw=="))
+                console.log(crypto_helper_1.CryptoHelper.encrypt_req("GM01"));
+                console.log(crypto_helper_1.CryptoHelper.decrypt_req(req.body.password));
                 //    console.log("Password",password)
                 let userRes = yield userRepo.findUser(username, password);
+                console.log("userRes", userRes);
                 if (userRes.status == base_controller_1.Status.success && userRes.body.length > 0) {
                     let user = userRes.body[0];
                     if (user != null) {
                         //      console.log(user.password)
                         //     CryptoHelper.decrypt_db(user.password)
                         if (user.password == password) {
+                            console.log("pass match");
                             // add more condition
                             let jwtUtil = new JWTGenerator_1.JWTUtil();
                             tokenData = jwtUtil.creatToken(43200, "" + user.ID, "" + user.group.group);
@@ -72,6 +75,7 @@ class AuthenticationHandler {
                             tokenModel.token = tokenData;
                             let tokenRepo = (0, typeorm_1.getCustomRepository)(token_repository_1.TokenRepository);
                             let tokenRes = yield tokenRepo.saveToken(tokenModel);
+                            console.log("tokenRes", tokenRes);
                             if (tokenRes.status == base_controller_1.Status.success) {
                                 status = true;
                             }

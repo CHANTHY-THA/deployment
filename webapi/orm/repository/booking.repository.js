@@ -65,8 +65,9 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
         return __awaiter(this, void 0, void 0, function* () {
             let resBody = new responseBody_1.ResponseBody();
             try {
-                console.log(booking);
                 let container = booking.container;
+                console.log("container");
+                console.log(container);
                 yield (0, typeorm_1.getCustomRepository)(container_repository_1.ContainerRepository).saveContainer(container);
                 booking.container = container;
                 if (this.hasNumber(booking.CKSNFile) == false) {

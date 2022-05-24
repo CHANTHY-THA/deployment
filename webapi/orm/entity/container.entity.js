@@ -139,6 +139,14 @@ __decorate([
 ], Container.prototype, "emptyDepo", void 0);
 __decorate([
     (0, typeorm_1.Column)({
+        type: "varchar",
+        length: 100,
+        nullable: true
+    }),
+    __metadata("design:type", String)
+], Container.prototype, "ladenDepo", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
         type: 'datetime',
         nullable: true
     }),

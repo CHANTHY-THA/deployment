@@ -30,7 +30,8 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: "nvarchar",
-        length: "45",
+        // length:"45",
+        length: "100",
         nullable: true
     }),
     __metadata("design:type", String)
