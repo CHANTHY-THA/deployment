@@ -372,8 +372,10 @@ let BookingRepository = class BookingRepository extends typeorm_1.Repository {
                 .innerJoin("booking.operation", "operation")
                 .innerJoin("booking.customer", "customer")
                 .leftJoin("booking.businessPartner", "businessPartner")
-                .where("(booking.CKSNFile = :CKSNFile and booking.isActive = 1 and booking.operationID = :operationID and 3 <> :groupID)", { "CKSNFile": CKSNFile, "operationID": operationID, "groupID": groupID })
-                .orWhere("(booking.CKSNFile = :CKSNFile and booking.isActive = 1  and 3=:groupID)", { "CKSNFile": CKSNFile, "groupID": groupID })
+                .where("(booking.CKSNFile = :CKSNFile and booking.isActive = 1 and booking.operationID = :operationID)", // and 3 <> :groupID
+            { "CKSNFile": CKSNFile, "operationID": operationID, "groupID": groupID })
+                .orWhere("(booking.CKSNFile = :CKSNFile and booking.isActive = 1)", // and 3=:groupID
+            { "CKSNFile": CKSNFile, "groupID": groupID })
                 .getMany().then(x => {
                 console.log(x);
                 resBody.body = x;
